@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="600" viewBox="0 0 900 600">
+  <rect width="900" height="600" fill="#f5fbff"/>
+  <rect x="90" y="60" width="720" height="480" rx="36" fill="#eaf6ff" stroke="#9dcff2" stroke-width="4"/>
+  <rect x="315" y="120" width="270" height="360" rx="26" fill="#ffffff" stroke="#72b5e6" stroke-width="6"/>
+  <line x1="450" y1="120" x2="450" y2="480" stroke="#2e86c1" stroke-width="8" stroke-dasharray="12 10"/>
+  <text x="450" y="520" text-anchor="middle" font-size="34" fill="#1f4f73" font-family="Arial">Sello central transparente</text>
+</svg>

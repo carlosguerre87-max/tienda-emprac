@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="600" viewBox="0 0 900 600">
+  <rect width="900" height="600" fill="#f8f4ee"/>
+  <rect x="90" y="60" width="720" height="480" rx="36" fill="#f0e6d7" stroke="#c8b297" stroke-width="4"/>
+  <rect x="300" y="120" width="300" height="360" rx="22" fill="#d9c0a2" stroke="#8d6e63" stroke-width="6"/>
+  <line x1="330" y1="180" x2="570" y2="180" stroke="#b08968" stroke-width="8"/>
+  <line x1="330" y1="250" x2="570" y2="250" stroke="#b08968" stroke-width="8"/>
+  <line x1="330" y1="320" x2="570" y2="320" stroke="#b08968" stroke-width="8"/>
+  <circle cx="450" cy="395" r="28" fill="#f4e7d6" stroke="#8d6e63" stroke-width="5"/>
+  <text x="450" y="520" text-anchor="middle" font-size="34" fill="#5a443d" font-family="Arial">Bolsa papel kraft</text>
+</svg>

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="600" viewBox="0 0 900 600">
+  <rect width="900" height="600" fill="#fff6ee"/>
+  <rect x="90" y="60" width="720" height="480" rx="36" fill="#ffe9d4" stroke="#f1ba82" stroke-width="4"/>
+  <rect x="300" y="130" width="300" height="300" rx="20" fill="#ffffff" stroke="#d35400" stroke-width="6"/>
+  <rect x="300" y="430" width="300" height="55" rx="8" fill="#ffd9b3" stroke="#d35400" stroke-width="6"/>
+  <line x1="340" y1="180" x2="560" y2="180" stroke="#f3c89f" stroke-width="6"/>
+  <line x1="340" y1="240" x2="560" y2="240" stroke="#f3c89f" stroke-width="6"/>
+  <line x1="340" y1="300" x2="560" y2="300" stroke="#f3c89f" stroke-width="6"/>
+  <text x="450" y="535" text-anchor="middle" font-size="34" fill="#7a3a10" font-family="Arial">Bolsa fondo cuadrado</text>
+</svg>
