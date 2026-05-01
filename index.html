@@ -157,6 +157,66 @@
             line-height: 1.6;
         }
 
+        .destacados {
+            padding: 60px 0;
+            background-color: white;
+        }
+
+        .destacados h2 {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 50px;
+            color: #FB8C00;
+        }
+
+        .destacados-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .destacado-card {
+            background-color: #fafafa;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.3s;
+            box-shadow: 0 4px 12px rgba(251, 140, 0, 0.1);
+            border: 2px solid #f0f0f0;
+        }
+
+        .destacado-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 24px rgba(251, 140, 0, 0.2);
+            border-color: #FB8C00;
+        }
+
+        .destacado-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: contain;
+            padding: 20px;
+            background: linear-gradient(135deg, rgba(251, 140, 0, 0.05) 0%, rgba(37, 211, 102, 0.05) 100%);
+        }
+
+        .destacado-card h3 {
+            padding: 20px 20px 10px;
+            font-size: 18px;
+            color: #212121;
+        }
+
+        .destacado-card p {
+            padding: 0 20px 20px;
+            color: #666;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .destacado-card .btn-primary {
+            margin: 0 20px 20px;
+            display: block;
+            text-align: center;
+        }
+
         .inspiration {
             padding: 60px 0;
             background: linear-gradient(135deg, #FB8C00 0%, #FF9800 100%);
@@ -373,6 +433,21 @@
                 font-size: 16px;
             }
 
+            .destacados h2,
+            .inspiration h2,
+            .history h2,
+            .features h2 {
+                font-size: 28px;
+            }
+
+            .destacados-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .destacado-card img {
+                height: 200px;
+            }
+
             .history-content {
                 grid-template-columns: 1fr;
             }
@@ -411,6 +486,41 @@
             <h2>Bienvenido a EMPRAC</h2>
             <p>Tu tienda virtual de confianza con los mejores productos</p>
             <a href="productos.html" class="btn-primary">Ver Productos</a>
+        </div>
+    </section>
+
+    <section class="destacados">
+        <div class="container">
+            <h2>Productos Destacados</h2>
+            <div class="destacados-grid">
+                <div class="destacado-card">
+                    <img src="assets/img/categorias/cat-1-sello-central-transparente.jpg" alt="Bolsa sello central transparente">
+                    <h3>Bolsas Sello Central Transparente</h3>
+                    <p>Empaques transparentes que dejan ver tu producto. Ideales para frituras, semillas y condimentos.</p>
+                    <a href="productos.html" class="btn-primary">Ver más</a>
+                </div>
+
+                <div class="destacado-card">
+                    <img src="assets/img/categorias/cat-2-sello-central-impresion-generica.jpg" alt="Bolsa con impresión genérica">
+                    <h3>Bolsas Sello Central con Impresión</h3>
+                    <p>Personaliza tu empaque con impresión genérica. Perfecto para tajaditas, yuca y malanga.</p>
+                    <a href="productos.html" class="btn-primary">Ver más</a>
+                </div>
+
+                <div class="destacado-card">
+                    <img src="assets/img/categorias/bolsa-cafe1.jpeg" alt="Bolsa para café y chocolate">
+                    <h3>Bolsas para Café y Chocolate</h3>
+                    <p>Bolsas especiales para café, chocolate y productos premium. Mantén la calidad de tu producto.</p>
+                    <a href="productos.html" class="btn-primary">Ver más</a>
+                </div>
+
+                <div class="destacado-card">
+                    <img src="assets/img/categorias/cat-7-personalizada.jpg" alt="Bolsa personalizada">
+                    <h3>Bolsas Personalizadas</h3>
+                    <p>Diseña tu propio empaque con tu logo y marca. Haz que tu producto sea único.</p>
+                    <a href="productos.html" class="btn-primary">Ver más</a>
+                </div>
+            </div>
         </div>
     </section>
 
