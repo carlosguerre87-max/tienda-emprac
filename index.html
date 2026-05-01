@@ -20,7 +20,6 @@
 
         html, body {
             width: 100%;
-            overflow-x: hidden;
         }
 
         body {
@@ -222,19 +221,17 @@
 
         .hero-banner-bottom-img {
             width: 100%;
-            margin-top: 50px;
+            background: #1a2d4a;
             display: block;
             line-height: 0;
         }
 
         .hero-banner-bottom-img img {
-            width: 100vw !important;
+            width: 100%;
             height: 380px;
             object-fit: cover;
             object-position: center center;
             display: block;
-            border-radius: 0;
-            margin-left: calc(-50vw + 50%);
         }
 
         .hero-img-placeholder {
@@ -614,14 +611,12 @@
                     </a>
                 </div>
             </div>
-
-        </div>
-        <div class="hero-banner-bottom-img">
-            <img src="assets/img/categorias/hero-baner.png" alt="Bolsas EMPRAC"
-                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-            <div class="hero-img-placeholder" style="display:none;">📦</div>
         </div>
     </section>
+    <div class="hero-banner-bottom-img">
+        <img src="assets/img/categorias/hero-baner.png" alt="Bolsas EMPRAC"
+             onerror="this.style.display='none';">
+    </div>
 
     <div class="hero-ideal">
         <div class="container">
