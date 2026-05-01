@@ -188,63 +188,130 @@
         }
 
         .destacados {
-            padding: 60px 0;
-            background-color: white;
+            padding: 40px 0;
+            background-color: #f7f8fa;
         }
 
-        .destacados h2 {
+        .destacados-header {
             text-align: center;
-            font-size: 36px;
-            margin-bottom: 50px;
-            color: #FB8C00;
+            margin-bottom: 30px;
+        }
+
+        .destacados-header h2 {
+            font-size: 30px;
+            font-weight: 800;
+            color: #1a2d4a;
+            margin-bottom: 6px;
+        }
+
+        .destacados-header p {
+            color: #888;
+            font-size: 15px;
         }
 
         .destacados-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
         }
 
         .destacado-card {
-            background-color: #fafafa;
-            border-radius: 8px;
+            background-color: white;
+            border-radius: 12px;
             overflow: hidden;
-            transition: all 0.3s;
-            box-shadow: 0 4px 12px rgba(251, 140, 0, 0.1);
-            border: 2px solid #f0f0f0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+            border: 1px solid #eee;
+            display: flex;
+            flex-direction: column;
         }
 
-        .destacado-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 8px 24px rgba(251, 140, 0, 0.2);
-            border-color: #FB8C00;
-        }
-
-        .destacado-card img {
+        .destacado-card-img {
             width: 100%;
-            height: 250px;
-            object-fit: contain;
-            padding: 20px;
-            background: linear-gradient(135deg, rgba(251, 140, 0, 0.05) 0%, rgba(37, 211, 102, 0.05) 100%);
+            height: 160px;
+            object-fit: cover;
+            background-color: #f0f0f0;
+            display: block;
         }
 
-        .destacado-card h3 {
-            padding: 20px 20px 10px;
-            font-size: 18px;
-            color: #212121;
+        .destacado-card-img.placeholder {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            background: linear-gradient(135deg, #f0f4f8, #e8edf3);
+            color: #aaa;
+            height: 160px;
         }
 
-        .destacado-card p {
-            padding: 0 20px 20px;
-            color: #666;
-            font-size: 14px;
+        .destacado-body {
+            padding: 14px 14px 16px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        .destacado-body h3 {
+            font-size: 15px;
+            font-weight: 700;
+            color: #1a2d4a;
+            margin-bottom: 6px;
+            line-height: 1.3;
+        }
+
+        .destacado-body p {
+            font-size: 12px;
+            color: #777;
             line-height: 1.5;
+            flex: 1;
+            margin-bottom: 12px;
         }
 
-        .destacado-card .btn-primary {
-            margin: 0 20px 20px;
+        .btn-ver {
             display: block;
             text-align: center;
+            background-color: #FB8C00;
+            color: white;
+            padding: 9px 14px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 13px;
+            transition: all 0.25s;
+        }
+
+        .btn-ver:hover {
+            background-color: #E07B00;
+            transform: translateY(-2px);
+        }
+
+        .beneficios {
+            background-color: white;
+            padding: 30px 0;
+            border-top: 1px solid #eee;
+            border-bottom: 1px solid #eee;
+        }
+
+        .beneficios-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            text-align: center;
+        }
+
+        .beneficio-item {
+            padding: 16px 8px;
+        }
+
+        .beneficio-item .ico {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .beneficio-item p {
+            font-size: 13px;
+            color: #444;
+            font-weight: 600;
+            line-height: 1.3;
         }
 
         footer {
@@ -335,8 +402,8 @@
                 grid-template-columns: 1fr;
             }
 
-            .destacado-card img {
-                height: 200px;
+            .beneficios-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
 
             .footer-buttons {
@@ -382,34 +449,59 @@
 
     <section class="destacados">
         <div class="container">
-            <h2>Productos Destacados</h2>
+            <div class="destacados-header">
+                <h2>Productos Destacados</h2>
+                <p>Soluciones de empaque para tu negocio</p>
+            </div>
             <div class="destacados-grid">
                 <div class="destacado-card">
-                    <img src="assets/img/categorias/cat-1-sello-central-transparente.jpg" alt="Bolsa sello central transparente">
-                    <h3>Bolsas Sello Central Transparente</h3>
-                    <p>Empaques transparentes que dejan ver tu producto. Ideales para frituras, semillas y condimentos.</p>
-                    <a href="productos.html" class="btn-primary">Ver más</a>
+                    <div class="destacado-card-img placeholder">📦</div>
+                    <div class="destacado-body">
+                        <h3>Bolsa Transparente</h3>
+                        <p>Ideal para snacks y productos secos</p>
+                        <a href="productos.html" class="btn-ver">Ver productos</a>
+                    </div>
                 </div>
 
                 <div class="destacado-card">
-                    <img src="assets/img/categorias/cat-2-sello-central-impresion-generica.jpg" alt="Bolsa con impresión genérica">
-                    <h3>Bolsas Sello Central con Impresión</h3>
-                    <p>Personaliza tu empaque con impresión genérica. Perfecto para tajaditas, yuca y malanga.</p>
-                    <a href="productos.html" class="btn-primary">Ver más</a>
+                    <div class="destacado-card-img placeholder">☕</div>
+                    <div class="destacado-body">
+                        <h3>Bolsa para Café</h3>
+                        <p>Con o sin válvula. Diferentes tamaños</p>
+                        <a href="productos.html" class="btn-ver">Ver productos</a>
+                    </div>
                 </div>
 
                 <div class="destacado-card">
-                    <img src="assets/img/categorias/bolsa-cafe1.jpeg" alt="Bolsa para café y chocolate">
-                    <h3>Bolsas para Café y Chocolate</h3>
-                    <p>Bolsas especiales para café, chocolate y productos premium. Mantén la calidad de tu producto.</p>
-                    <a href="productos.html" class="btn-primary">Ver más</a>
+                    <div class="destacado-card-img placeholder">🛍️</div>
+                    <div class="destacado-body">
+                        <h3>Bolsa Kraft con Ventana</h3>
+                        <p>Próximamente disponible</p>
+                        <a href="productos.html" class="btn-ver">Ver productos</a>
+                    </div>
                 </div>
+            </div>
+        </div>
+    </section>
 
-                <div class="destacado-card">
-                    <img src="assets/img/categorias/cat-7-personalizada.jpg" alt="Bolsa personalizada">
-                    <h3>Bolsas Personalizadas</h3>
-                    <p>Diseña tu propio empaque con tu logo y marca. Haz que tu producto sea único.</p>
-                    <a href="productos.html" class="btn-primary">Ver más</a>
+    <section class="beneficios">
+        <div class="container">
+            <div class="beneficios-grid">
+                <div class="beneficio-item">
+                    <div class="ico">🚚</div>
+                    <p>Entrega rápida<br>en Honduras</p>
+                </div>
+                <div class="beneficio-item">
+                    <div class="ico">📦</div>
+                    <p>Stock<br>disponible</p>
+                </div>
+                <div class="beneficio-item">
+                    <div class="ico">💬</div>
+                    <p>Atención directa<br>por WhatsApp</p>
+                </div>
+                <div class="beneficio-item">
+                    <div class="ico">🏷️</div>
+                    <p>Precios al<br>por mayor</p>
                 </div>
             </div>
         </div>
