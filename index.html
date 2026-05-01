@@ -24,10 +24,10 @@
         }
 
         header {
-            background-color: #FB8C00;
+            background-color: #1a2d4a;
             color: white;
             padding: 20px 0;
-            box-shadow: 0 4px 12px rgba(251, 140, 0, 0.3);
+            box-shadow: 0 4px 12px rgba(10, 20, 40, 0.4);
         }
 
         .container {
@@ -48,14 +48,17 @@
         }
 
         .nav-buttons a {
-            background-color: #E07B00;
+            background-color: #2d4a6a;
             color: white;
-            padding: 10px 20px;
+            padding: 10px 24px;
             border-radius: 6px;
             text-decoration: none;
-            font-weight: 600;
+            font-weight: 700;
+            letter-spacing: 0.5px;
             transition: all 0.3s;
             border: 2px solid transparent;
+            text-transform: uppercase;
+            font-size: 14px;
         }
 
         .nav-buttons a:hover {
@@ -66,12 +69,39 @@
         }
 
         .nav-buttons a.active {
-            background-color: #25D366;
-            border-color: #20BA5A;
+            background-color: #FB8C00;
+            border-color: #E07B00;
         }
 
         h1 {
             font-size: 28px;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-text .brand-name {
+            font-size: 22px;
+            font-weight: 800;
+            color: white;
+            letter-spacing: 1px;
+            line-height: 1.1;
+        }
+
+        .logo-text .brand-sub {
+            font-size: 11px;
+            color: rgba(255,255,255,0.75);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 500;
         }
 
         .hero {
@@ -218,11 +248,11 @@
         }
 
         footer {
-            background-color: #FB8C00;
+            background-color: #1a2d4a;
             color: white;
             padding: 30px 0;
             margin-top: 60px;
-            box-shadow: 0 -4px 12px rgba(251, 140, 0, 0.3);
+            box-shadow: 0 -4px 12px rgba(10, 20, 40, 0.4);
         }
 
         .footer-buttons {
@@ -233,7 +263,7 @@
         }
 
         .footer-buttons a {
-            background-color: #E07B00;
+            background-color: #2d4a6a;
             color: white;
             padding: 15px 40px;
             border-radius: 8px;
@@ -325,7 +355,15 @@
     <header>
         <div class="container">
             <div class="header-content">
-                <h1><img src="assets/img/categorias/logo-emprac.jpg" alt="EMPRAC" style="height:52px; vertical-align:middle; border-radius:6px;"></h1>
+                <h1>
+                    <div class="logo-area">
+                        <img src="assets/img/categorias/logo-emprac.jpg" alt="EMPRAC" style="height:52px; border-radius:8px;">
+                        <div class="logo-text">
+                            <span class="brand-name">EMPRAC</span>
+                            <span class="brand-sub">Empaques Prácticos</span>
+                        </div>
+                    </div>
+                </h1>
                 <nav class="nav-buttons">
                     <a href="index.html" class="active">Inicio</a>
                     <a href="productos.html">Productos</a>
