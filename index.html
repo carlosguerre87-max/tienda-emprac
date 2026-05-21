@@ -30,7 +30,7 @@
         }
 
         header {
-            background: linear-gradient(180deg, #cccccc 0%, #151515 10%, #000000 50%, #151515 90%, #cccccc 100%);
+            background: linear-gradient(180deg, #cccccc 0%, #151515 5%, #000000 50%, #151515 95%, #cccccc 100%);
             color: white;
             padding: 20px 0;
             box-shadow: 0 4px 12px rgba(10, 20, 40, 0.4);
@@ -133,7 +133,7 @@
         .hero-whatsapp-btn {
             position: absolute;
             left: 50%;
-            bottom: 580px;
+            bottom: 24px;
             transform: translateX(-50%);
             display: inline-flex;
             align-items: center;
@@ -160,7 +160,7 @@
         }
 
         .beneficios {
-            background: linear-gradient(180deg, #cccccc 0%, #151515 10%, #000000 50%, #151515 90%, #cccccc 100%);
+            background: linear-gradient(180deg, #cccccc 0%, #151515 5%, #000000 50%, #151515 95%, #cccccc 100%);
             padding: 12px 0;
             border-top: 1px solid #eee;
             border-bottom: 1px solid #eee;
@@ -214,15 +214,19 @@
                 max-width: 72vw;
             }
 
+            .hero-banner-bottom-img {
+                min-height: 62vh;
+            }
+
             .hero-banner-bottom-img img {
                 width: 100%;
-                height: auto;
-                object-fit: contain;
-                object-position: center top;
+                height: 62vh;
+                object-fit: cover;
+                object-position: center center;
             }
 
             .hero-whatsapp-btn {
-                bottom: 580px;
+                bottom: 14px;
                 font-size: 13px;
                 padding: 10px 14px;
             }
