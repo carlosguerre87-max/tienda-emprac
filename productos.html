@@ -627,6 +627,27 @@
             content: '⚖️';
             font-size: .85rem;
         }
+        .stock-group-header {
+            grid-column: 1 / -1;
+            border-left: 4px solid #6f4e37;
+            padding: 10px 16px;
+            background: #fdf6f0;
+            border-radius: 0 8px 8px 0;
+            margin-top: 8px;
+        }
+        .stock-group-header h3 {
+            font-size: 1rem;
+            font-weight: 800;
+            color: #4a2c0a;
+            margin-bottom: 3px;
+        }
+        .stock-group-header p {
+            font-size: .83rem;
+            color: #7a5230;
+            line-height: 1.4;
+            margin: 0;
+        }
+
         .stock-badge.cafe  { background: #6f4e37; }
         .stock-badge.snack { background: #FB8C00; }
         .stock-badge.agotado { background: #9e9e9e; }
@@ -941,6 +962,24 @@
             "5.25X10.5": "1 Libra",
         };
 
+        const STOCK_SUBTITULOS = {
+            "metalizada": {
+                titulo: "Bolsas Metalizadas",
+                subtitulo: "Bolsa Cello Central con Fuelle: Metalizadas Trilaminadas de 70 micras."
+            },
+            "premium": {
+                titulo: "Bolsas Premium (8 Sides)",
+                subtitulo: "Bolsa Fondo Cuadrado (8 Sides): Bolsas Metalizadas Trilaminadas 120 micras con v\u00e1lvula desgasificadora y zipper abre f\u00e1cil."
+            }
+        };
+
+        function stockGrupoCafe(descripcion) {
+            const d = (descripcion || "").toLowerCase();
+            if (d.includes("metalizada")) return "metalizada";
+            if (d.includes("premium") || d.includes("premiun")) return "premium";
+            return "otro";
+        }
+
         const WA_SVG = `<svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M16 .5C7.439.5.5 7.439.5 16c0 2.82.737 5.463 2.023 7.76L.5 31.5l8.01-2.006A15.443 15.443 0 0016 31.5C24.561 31.5 31.5 24.561 31.5 16S24.561.5 16 .5zm0 28.226a13.67 13.67 0 01-6.964-1.898l-.5-.297-5.175 1.295 1.33-4.918-.33-.513A13.664 13.664 0 012.274 16C2.274 8.956 8.044 3.226 16 3.226S29.726 8.956 29.726 16 23.956 28.726 16 28.726zm7.473-10.238c-.41-.206-2.423-1.195-2.798-1.331-.376-.137-.649-.206-.923.206-.273.41-1.059 1.332-1.298 1.606-.239.273-.479.308-.888.103-.41-.206-1.73-.636-3.294-2.031-1.218-1.085-2.04-2.424-2.279-2.833-.239-.41-.025-.632.18-.836.185-.183.41-.479.616-.718.205-.24.273-.41.41-.683.137-.273.068-.513-.034-.718-.103-.206-.923-2.22-1.264-3.039-.333-.797-.672-.688-.923-.7-.239-.01-.513-.013-.787-.013s-.718.103-1.094.513c-.376.41-1.435 1.4-1.435 3.415s1.47 3.963 1.675 4.236c.205.273 2.893 4.416 7.008 6.192.98.422 1.744.675 2.34.864.983.313 1.878.268 2.585.163.789-.118 2.423-.99 2.764-1.946.342-.957.342-1.777.24-1.946-.103-.17-.376-.273-.786-.479z"/></svg>`;
 
         let stockTodos = [];
@@ -990,7 +1029,9 @@
 
             status.innerHTML = `<span>${visibles.length}</span> producto${visibles.length !== 1 ? "s" : ""} disponible${visibles.length !== 1 ? "s" : ""}`;
 
-            grid.innerHTML = visibles.map(p => {
+            let lastGrupo = null;
+            const parts = [];
+            for (const p of visibles) {
                 const cat    = stockCategoria(p);
                 const tam    = p.tamanio ? `<dt>Tamaño</dt><dd>${p.tamanio}</dd>` : "";
                 const precio = p.precio_unitario > 0
@@ -1008,17 +1049,20 @@
                 const estadoHtml = agotado
                     ? `<div class="stock-disponible agotado-label"><span class="stock-dot"></span> Agotado temporalmente</div>`
                     : `<div class="stock-disponible"><span class="stock-dot"></span> En existencia</div>`;
-                const stockHtml = agotado
-                    ? `<dt>Stock</dt><dd>Agotado</dd>`
-                    : `<dt>Stock</dt><dd>${p.stock.toLocaleString("es-HN")} unid.</dd>`;
                 const btnHtml = agotado
-                    ? `<a class="stock-btn-wa" href="${stockWaLink(p)}" target="_blank" rel="noopener" style="background:#9e9e9e">
-                            ${WA_SVG} Consultar disponibilidad
-                       </a>`
-                    : `<a class="stock-btn-wa" href="${stockWaLink(p)}" target="_blank" rel="noopener">
-                            ${WA_SVG} Consultar por WhatsApp
-                       </a>`;
-                return `
+                    ? `<a class="stock-btn-wa" href="${stockWaLink(p)}" target="_blank" rel="noopener" style="background:#9e9e9e">${WA_SVG} Consultar disponibilidad</a>`
+                    : `<a class="stock-btn-wa" href="${stockWaLink(p)}" target="_blank" rel="noopener">${WA_SVG} Consultar por WhatsApp</a>`;
+
+                if (stockTab === "cafe") {
+                    const grupo = stockGrupoCafe(p.descripcion);
+                    if (grupo !== lastGrupo && STOCK_SUBTITULOS[grupo]) {
+                        const info = STOCK_SUBTITULOS[grupo];
+                        parts.push(`<div class="stock-group-header"><h3>${info.titulo}</h3><p>${info.subtitulo}</p></div>`);
+                    }
+                    lastGrupo = grupo;
+                }
+
+                parts.push(`
                 <div class="stock-card${agotado ? ' agotado' : ''}">
                     ${fotoHtml}
                     <div class="stock-card-body">
@@ -1033,8 +1077,9 @@
                         ${estadoHtml}
                         ${btnHtml}
                     </div>
-                </div>`;
-            }).join("");
+                </div>`);
+            }
+            grid.innerHTML = parts.join("");
         }
 
         async function stockCargar(spinner = false) {
