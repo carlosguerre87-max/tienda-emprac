@@ -1129,11 +1129,11 @@
                         <span>Tama\u00f1o: ${p.tamanio || '\u2014'}</span>
                     </div>
                     <div class="pedido-item-ctrl">
-                        <button onclick="pedidoCambiarCantidad(${JSON.stringify(key)}, -1)">\u2212</button>
+                        <button onclick="pedidoCambiarCantidad('${key}', -1)">\u2212</button>
                         <span>${cantidad}</span>
-                        <button onclick="pedidoCambiarCantidad(${JSON.stringify(key)}, 1)">+</button>
+                        <button onclick="pedidoCambiarCantidad('${key}', 1)">+</button>
                     </div>
-                    <button class="pedido-item-quitar" onclick="pedidoQuitar(${JSON.stringify(key)})" title="Quitar">&times;</button>
+                    <button class="pedido-item-quitar" onclick="pedidoQuitar('${key}')" title="Quitar">&times;</button>
                 </div>`).join("");
         }
 
@@ -1221,14 +1221,14 @@
                     ? `<a class="stock-btn-wa" href="${stockWaLink(p)}" target="_blank" rel="noopener" style="background:#9e9e9e">${WA_SVG} Consultar disponibilidad</a>`
                     : enPedido
                         ? `<div class="stock-cantidad-ctrl">
-                            <button onclick="pedidoCambiarCantidad(${JSON.stringify(key)}, -1)">\u2212</button>
+                            <button onclick="pedidoCambiarCantidad('${key}', -1)">&#x2212;</button>
                             <input type="number" value="${enPedido.cantidad}" min="1"
-                                onchange="pedidoSetCantidad(${JSON.stringify(key)}, this.value)"
+                                onchange="pedidoSetCantidad('${key}', this.value)"
                                 style="width:46px;text-align:center;border:1px solid #ddd;border-radius:6px;padding:4px;font-size:.95rem;font-weight:700">
-                            <button onclick="pedidoCambiarCantidad(${JSON.stringify(key)}, 1)">+</button>
-                            <span class="stock-cantidad-quitar" onclick="pedidoQuitar(${JSON.stringify(key)})">Quitar</span>
+                            <button onclick="pedidoCambiarCantidad('${key}', 1)">+</button>
+                            <span class="stock-cantidad-quitar" onclick="pedidoQuitar('${key}')">Quitar</span>
                            </div>`
-                        : `<button class="stock-btn-pedido" onclick="pedidoAgregar(${JSON.stringify(key)})">\uD83D\uDED2 Agregar a Pedido</button>`;
+                        : `<button class="stock-btn-pedido" onclick="pedidoAgregar('${key}')">&#x1F6D2; Agregar a Pedido</button>`;
 
                 if (stockTab === "cafe") {
                     const grupo = stockGrupoCafe(p.descripcion);
