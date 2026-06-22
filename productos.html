@@ -928,7 +928,7 @@
             const arr    = stockTab === "cafe" ? STOCK_CAFE : STOCK_SNACK;
 
             const visibles = lista
-                .filter(p => stockCategoria(p) === stockTab)
+                .filter(p => stockCategoria(p) === stockTab && p.stock > 0)
                 .sort((a, b) => {
                     const ia = arr.indexOf(a.descripcion);
                     const ib = arr.indexOf(b.descripcion);
