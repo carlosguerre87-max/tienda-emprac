@@ -517,6 +517,137 @@
                 padding: 12px 20px;
             }
         }
+
+        /* ── STOCK EN TIEMPO REAL ── */
+        .stock-section { margin-top: 50px; }
+
+        .stock-tabs {
+            display: flex;
+            gap: 0;
+            max-width: 480px;
+            margin: 0 auto 28px;
+        }
+        .stock-tab {
+            flex: 1;
+            padding: 12px 8px;
+            border: 2px solid #dde6f0;
+            background: #fff;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background .18s, color .18s;
+            color: #7f8c8d;
+        }
+        .stock-tab:first-child { border-radius: 10px 0 0 10px; }
+        .stock-tab:last-child  { border-radius: 0 10px 10px 0; border-left: none; }
+        .stock-tab.cafe.active  { background: #6f4e37; color: #fff; border-color: #6f4e37; }
+        .stock-tab.snack.active { background: #FB8C00; color: #fff; border-color: #FB8C00; }
+        .stock-tab.cafe:hover:not(.active)  { background: #f5ede8; color: #6f4e37; }
+        .stock-tab.snack:hover:not(.active) { background: #fff8f0; color: #FB8C00; }
+
+        .stock-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .stock-card {
+            background: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            transition: transform .15s, box-shadow .15s;
+        }
+        .stock-card:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.12); }
+
+        .stock-badge {
+            display: inline-block;
+            font-size: .72rem;
+            font-weight: 700;
+            letter-spacing: .6px;
+            text-transform: uppercase;
+            padding: 3px 10px;
+            border-radius: 20px;
+            align-self: flex-start;
+            color: #fff;
+        }
+        .stock-badge.cafe  { background: #6f4e37; }
+        .stock-badge.snack { background: #FB8C00; }
+
+        .stock-card h4 { font-size: 1rem; font-weight: 700; color: #2c3e50; }
+
+        .stock-meta {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4px 12px;
+            font-size: .85rem;
+        }
+        .stock-meta dt { color: #7f8c8d; }
+        .stock-meta dd { font-weight: 600; color: #2c3e50; }
+
+        .stock-disponible {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: .82rem;
+            font-weight: 600;
+            color: #1f7a3e;
+            background: #edf7ef;
+            padding: 4px 12px;
+            border-radius: 20px;
+            border: 1px solid #b2dfc5;
+        }
+        .stock-dot {
+            width: 7px; height: 7px;
+            border-radius: 50%;
+            background: #27ae60;
+            animation: sp 1.8s infinite;
+        }
+        @keyframes sp { 0%,100%{opacity:1} 50%{opacity:.3} }
+
+        .stock-btn-wa {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: #25D366;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: .9rem;
+            padding: 11px;
+            border-radius: 8px;
+            margin-top: auto;
+            transition: background .2s;
+        }
+        .stock-btn-wa:hover { background: #20BA5A; }
+        .stock-btn-wa svg   { width: 18px; height: 18px; fill: #fff; flex-shrink: 0; }
+
+        .stock-msg {
+            text-align: center;
+            color: #7f8c8d;
+            padding: 40px 20px;
+            font-size: .95rem;
+            grid-column: 1 / -1;
+        }
+        .stock-spinner {
+            width: 36px; height: 36px;
+            border: 4px solid #dde6f0;
+            border-top-color: #FB8C00;
+            border-radius: 50%;
+            animation: sp .8s linear infinite;
+            margin: 0 auto 12px;
+        }
+        .stock-status {
+            text-align: center;
+            font-size: .82rem;
+            color: #7f8c8d;
+            margin-bottom: 16px;
+        }
+        .stock-status span { font-weight: 700; color: #FB8C00; }
     </style>
 </head>
 <body>
@@ -545,33 +676,24 @@
 
     <main>
         <div class="container">
-            <h2 class="page-title">Catálogo de Productos</h2>
-            <p class="page-subtitle">Estas son las categorías principales de empaques que ofrece EMPRAC.</p>
 
-            <section class="categories-section">
-                <h3>Categorías de Productos</h3>
-                <div class="categories-grid">
-                    <button class="category-item active" type="button" onclick="showCategory(1, this)"><div class="category-thumb"><img src="assets/img/categorias/cat-1-sello-central-transparente.jpg?v=3" alt="Sello central transparente"></div><span>1. Bolsas sello central transparente.</span></button>
-                    <button class="category-item" type="button" onclick="showCategory(2, this)"><div class="category-thumb"><img src="assets/img/categorias/cat-2-sello-central-impresion-generica.jpg?v=3" alt="Sello central con impresion generica"></div><span>2. Bolsa sello central con impresion generica.</span></button>
-                    <button class="category-item" type="button" onclick="showCategory(3, this)"><div class="category-thumb"><img src="assets/img/categorias/cat-3-stand-up.jpg?v=3" alt="Bolsa Stand Up"><span class="coming-soon-badge">Proximamente!!!!</span></div><span>3. Bolsa Stand Up.</span></button>
-                    <button class="category-item" type="button" onclick="showCategory(4, this)"><div class="category-thumb"><img src="assets/img/categorias/bolsa-cafe1.jpeg?v=3" alt="Bolsas para cafe, chocolate"></div><span>4. Bolsas para cafe, chocolate.</span></button>
-                    <button class="category-item" type="button" onclick="showCategory(5, this)"><div class="category-thumb"><img src="assets/img/categorias/cat-5-papel-kraft.jpg?v=3" alt="Bolsa papel kraft"><span class="coming-soon-badge">Proximamente!!!!</span></div><span>5. Bolsa papel kraft.</span></button>
-                    <button class="category-item" type="button" onclick="showCategory(6, this)"><div class="category-thumb"><img src="assets/img/categorias/cat-6-celofan-pegatina.jpg?v=3" alt="Bolsa de celofán (OPP) con pegatina"><span class="coming-soon-badge">Proximamente!!!!</span></div><span>6. Bolsa de celofán (OPP) con pegatina.</span></button>
-                    <button class="category-item" type="button" onclick="showCategory(7, this)"><div class="category-thumb"><img src="assets/img/categorias/cat-7-personalizada.jpg?v=3" alt="Bolsa personalizada"><span class="coming-soon-badge">Proximamente!!!!</span></div><span>7. Bolsa personalizada.</span></button>
+            <!-- ══ STOCK EN TIEMPO REAL ══════════════════════════════ -->
+            <section class="stock-section" style="margin-top:0;">
+                <h2 class="page-title">Stock Disponible Ahora</h2>
+                <p class="page-subtitle">Existencia real actualizada desde nuestro inventario. Consulta por WhatsApp y te atendemos de inmediato.</p>
+
+                <div class="stock-tabs">
+                    <button class="stock-tab cafe active" onclick="stockCambiarTab('cafe')">☕ Café</button>
+                    <button class="stock-tab snack"       onclick="stockCambiarTab('snack')">🍿 Snack</button>
+                </div>
+
+                <p class="stock-status" id="stock-status"></p>
+                <div class="stock-grid" id="stock-grid">
+                    <div class="stock-msg"><div class="stock-spinner"></div>Cargando stock…</div>
                 </div>
             </section>
+            <!-- ═══════════════════════════════════════════════════════ -->
 
-            <section class="category-preview" id="category-preview">
-                <div class="preview-visual">
-                    <img id="preview-image" alt="Bolsas sello central transparente" src="assets/img/categorias/cat-1-sello-central-transparente.jpg?v=3">
-                </div>
-                <div class="preview-content">
-                    <span class="preview-badge" id="preview-badge">Categoria destacada</span>
-                    <h3 id="preview-title">Bolsas sello central transparente, Tipo almohada y tipo fuelle</h3>
-                    <p id="preview-description">Vista de ejemplo de una bolsa transparente con sello central, ideal para exhibir el producto y mantener una presentacion limpia.</p>
-                    <a class="category-link" id="preview-link" href="https://wa.me/50492902991">Consultar tamanos y micrajes disponibles por WhatsApp</a>
-                </div>
-            </section>
         </div>
     </main>
 
@@ -686,5 +808,137 @@
         updateCartCount();
         showCategory(1, document.querySelector('.category-item.active'));
     </script>
+
+    <!-- ══ STOCK EN TIEMPO REAL - Script ══════════════════════════ -->
+    <script>
+        const STOCK_API      = "https://api.emprachn.com/catalogo/productos";
+        const STOCK_WA_NUM   = "50492902991";
+        const STOCK_REFRESH  = 60;
+
+        const STOCK_CAFE = [
+            "Bolsa Metalizada Negro",
+            "Bolsa metalizada blanca",
+            "Bolsa Metalizada Rojo",
+            "Bolsa Metalizada Verde",
+            "Bolsa metalizada plata",
+            "Bolsa metalizada being",
+            "Bolsa Premium (8 side) blanco",
+            "Bolsa premium (8 side) Kraft",
+            "Bolsa Premium (8 side) negro",
+            "Bolsa Premium (8 side) plateado",
+            "Bolsa Premium (8 side) Rojo",
+            "Bolsa Premium (8 side) Verde",
+        ];
+
+        const STOCK_SNACK = [
+            "Bolsa Chicharron",
+            "Bolsa popcorn",
+            "Bolsa Popcorn Fuelle",
+            "Bolsa platano chips",
+            "Bolsa papas",
+            "Bolsa bopp transp 35mc",
+            "Bolsa bopp transp fuelle 35mc",
+            "Bolsa bopp transp 50mc",
+            "Bolsa bopp transp fuelle 50mc",
+        ];
+
+        const WA_SVG = `<svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M16 .5C7.439.5.5 7.439.5 16c0 2.82.737 5.463 2.023 7.76L.5 31.5l8.01-2.006A15.443 15.443 0 0016 31.5C24.561 31.5 31.5 24.561 31.5 16S24.561.5 16 .5zm0 28.226a13.67 13.67 0 01-6.964-1.898l-.5-.297-5.175 1.295 1.33-4.918-.33-.513A13.664 13.664 0 012.274 16C2.274 8.956 8.044 3.226 16 3.226S29.726 8.956 29.726 16 23.956 28.726 16 28.726zm7.473-10.238c-.41-.206-2.423-1.195-2.798-1.331-.376-.137-.649-.206-.923.206-.273.41-1.059 1.332-1.298 1.606-.239.273-.479.308-.888.103-.41-.206-1.73-.636-3.294-2.031-1.218-1.085-2.04-2.424-2.279-2.833-.239-.41-.025-.632.18-.836.185-.183.41-.479.616-.718.205-.24.273-.41.41-.683.137-.273.068-.513-.034-.718-.103-.206-.923-2.22-1.264-3.039-.333-.797-.672-.688-.923-.7-.239-.01-.513-.013-.787-.013s-.718.103-1.094.513c-.376.41-1.435 1.4-1.435 3.415s1.47 3.963 1.675 4.236c.205.273 2.893 4.416 7.008 6.192.98.422 1.744.675 2.34.864.983.313 1.878.268 2.585.163.789-.118 2.423-.99 2.764-1.946.342-.957.342-1.777.24-1.946-.103-.17-.376-.273-.786-.479z"/></svg>`;
+
+        let stockTodos = [];
+        let stockTab   = "cafe";
+
+        function stockCategoria(p) {
+            const d = (p.descripcion || "").trim();
+            if (STOCK_CAFE.includes(d))  return "cafe";
+            if (STOCK_SNACK.includes(d)) return "snack";
+            return null;
+        }
+
+        function stockCambiarTab(tab) {
+            stockTab = tab;
+            document.querySelectorAll(".stock-tab").forEach(b => b.classList.remove("active"));
+            document.querySelector(`.stock-tab.${tab}`).classList.add("active");
+            stockRender(stockTodos);
+        }
+
+        function stockWaLink(p) {
+            const t = encodeURIComponent(
+                `Hola! Vi su catálogo en emprachn.com y me interesa:\n📦 *${p.descripcion}*\n📐 Tamaño: ${p.tamanio || "N/A"}\n¿Me pueden dar más información?`
+            );
+            return `https://wa.me/${STOCK_WA_NUM}?text=${t}`;
+        }
+
+        function stockRender(lista) {
+            const grid   = document.getElementById("stock-grid");
+            const status = document.getElementById("stock-status");
+            const arr    = stockTab === "cafe" ? STOCK_CAFE : STOCK_SNACK;
+
+            const visibles = lista
+                .filter(p => stockCategoria(p) === stockTab)
+                .sort((a, b) => {
+                    const ia = arr.indexOf(a.descripcion);
+                    const ib = arr.indexOf(b.descripcion);
+                    if (ia === -1 && ib === -1) return a.descripcion.localeCompare(b.descripcion);
+                    if (ia === -1) return 1;
+                    if (ib === -1) return -1;
+                    return ia - ib;
+                });
+
+            if (!visibles.length) {
+                grid.innerHTML = `<div class="stock-msg">No hay productos disponibles en esta categoría.</div>`;
+                status.innerHTML = "";
+                return;
+            }
+
+            status.innerHTML = `<span>${visibles.length}</span> producto${visibles.length !== 1 ? "s" : ""} disponible${visibles.length !== 1 ? "s" : ""}`;
+
+            grid.innerHTML = visibles.map(p => {
+                const cat    = stockCategoria(p);
+                const tam    = p.tamanio ? `<dt>Tamaño</dt><dd>${p.tamanio}</dd>` : "";
+                const precio = p.precio_unitario > 0
+                    ? `<dt>Precio unit.</dt><dd>L ${p.precio_unitario.toFixed(2)}</dd>`
+                    : "";
+                return `
+                <div class="stock-card">
+                    <span class="stock-badge ${cat}">Disponible</span>
+                    <h4>${p.descripcion}</h4>
+                    <dl class="stock-meta">
+                        ${tam}
+                        <dt>Stock</dt><dd>${p.stock.toLocaleString("es-HN")} unid.</dd>
+                        ${precio}
+                    </dl>
+                    <div class="stock-disponible"><span class="stock-dot"></span> En existencia</div>
+                    <a class="stock-btn-wa" href="${stockWaLink(p)}" target="_blank" rel="noopener">
+                        ${WA_SVG} Consultar por WhatsApp
+                    </a>
+                </div>`;
+            }).join("");
+        }
+
+        async function stockCargar(spinner = false) {
+            if (spinner) {
+                document.getElementById("stock-grid").innerHTML =
+                    `<div class="stock-msg"><div class="stock-spinner"></div>Cargando stock…</div>`;
+            }
+            try {
+                const r = await fetch(STOCK_API);
+                if (!r.ok) throw new Error(`HTTP ${r.status}`);
+                stockTodos = (await r.json()).productos || [];
+                stockRender(stockTodos);
+                const h = new Date().toLocaleTimeString("es-HN");
+                document.getElementById("stock-status").innerHTML +=
+                    ` &nbsp;·&nbsp; Actualizado: ${h}`;
+            } catch(e) {
+                if (spinner)
+                    document.getElementById("stock-grid").innerHTML =
+                        `<div class="stock-msg">⚠️ No se pudo cargar el stock. Intente recargar la página.</div>`;
+                console.error("Stock error:", e);
+            }
+        }
+
+        stockCargar(true);
+        setInterval(() => stockCargar(false), STOCK_REFRESH * 1000);
+    </script>
+    <!-- ════════════════════════════════════════════════════════════ -->
 </body>
 </html>
