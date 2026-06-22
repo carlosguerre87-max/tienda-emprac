@@ -610,6 +610,23 @@
             align-self: flex-start;
             color: #fff;
         }
+        .stock-presentacion-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: #fff3e0;
+            color: #e65100;
+            border: 1.5px solid #ffb74d;
+            font-size: .82rem;
+            font-weight: 800;
+            padding: 5px 12px;
+            border-radius: 20px;
+            letter-spacing: .3px;
+        }
+        .stock-presentacion-badge::before {
+            content: '⚖️';
+            font-size: .85rem;
+        }
         .stock-badge.cafe  { background: #6f4e37; }
         .stock-badge.snack { background: #FB8C00; }
         .stock-badge.agotado { background: #9e9e9e; }
@@ -984,7 +1001,7 @@
                     : "";
                 const presentacion = STOCK_PRESENTACION[(p.tamanio || "").trim()];
                 const presentacionHtml = presentacion
-                    ? `<dt>Presentación</dt><dd>${presentacion}</dd>`
+                    ? `<div class="stock-presentacion-badge">⚖️ Presentación: <strong>${presentacion}</strong></div>`
                     : "";
                 const estadoHtml = agotado
                     ? `<div class="stock-disponible agotado-label"><span class="stock-dot"></span> Agotado temporalmente</div>`
@@ -1007,10 +1024,10 @@
                         <h4>${p.descripcion}</h4>
                         <dl class="stock-meta">
                             ${tam}
-                            ${presentacionHtml}
-                            ${stockHtml}
+                            <dt>Stock</dt><dd>${agotado ? 'Agotado' : p.stock.toLocaleString('es-HN') + ' unid.'}</dd>
                             ${precio}
                         </dl>
+                        ${presentacionHtml}
                         ${estadoHtml}
                         ${btnHtml}
                     </div>
