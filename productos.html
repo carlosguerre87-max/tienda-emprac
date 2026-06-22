@@ -24,7 +24,7 @@
         }
 
         header {
-            background-color: #1a2d4a;
+            background: linear-gradient(180deg, #cccccc 0%, #151515 5%, #000000 50%, #151515 95%, #cccccc 100%);
             color: white;
             padding: 20px 0;
             box-shadow: 0 4px 12px rgba(10, 20, 40, 0.4);
@@ -40,16 +40,17 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 15px;
         }
 
         .nav-buttons {
             display: flex;
             gap: 15px;
+            width: 340px;
         }
 
         .nav-buttons a {
-            background-color: #2d4a6a;
+            flex: 1;
+            background-color: #151515;
             color: white;
             padding: 10px 24px;
             border-radius: 6px;
@@ -58,20 +59,38 @@
             letter-spacing: 0.5px;
             transition: all 0.3s;
             border: 2px solid transparent;
+            text-align: center;
             text-transform: uppercase;
             font-size: 14px;
         }
 
         .nav-buttons a:hover {
-            background-color: #25D366;
-            border-color: #20BA5A;
+            background-color: #151515;
+            border-color: white;
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+            box-shadow: 0 4px 12px rgba(255, 140, 0, 0.3);
         }
 
         .nav-buttons a.active {
-            background-color: #FB8C00;
-            border-color: #E07B00;
+            background-color: #f15a24;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(241, 90, 36, 0.3);
+        }
+
+        .nav-buttons a.active:hover {
+            background-color: #151515;
+            border-color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 140, 0, 0.3);
+        }
+
+        .brand-logo {
+            height: 62px;
+            width: auto;
+            max-width: 360px;
+            border-radius: 8px;
+            object-fit: contain;
+            display: block;
         }
 
         h1 {
@@ -656,11 +675,7 @@
             <div class="header-content">
                 <h1>
                     <div class="logo-area">
-                        <img src="assets/img/categorias/logo-emprac.jpg?v=3" alt="EMPRAC" style="height:52px; border-radius:8px;">
-                        <div class="logo-text">
-                            <span class="brand-name">EMPRAC</span>
-                            <span class="brand-sub">Empaques Prácticos</span>
-                        </div>
+                        <img src="Logo de EMPRAC.png?v=3" alt="EMPRAC" class="brand-logo">
                     </div>
                 </h1>
                 <nav class="nav-buttons">
