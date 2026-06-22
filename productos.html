@@ -865,8 +865,7 @@
         function stockCategoria(p) {
             const d = (p.descripcion || "").trim();
             if (STOCK_CAFE.includes(d))  return "cafe";
-            if (STOCK_SNACK.includes(d)) return "snack";
-            return null;
+            return "snack"; // todo lo que no es Cafe va a Snack
         }
 
         function stockCambiarTab(tab) {
