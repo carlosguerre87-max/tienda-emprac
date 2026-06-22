@@ -612,6 +612,23 @@
         }
         .stock-badge.cafe  { background: #6f4e37; }
         .stock-badge.snack { background: #FB8C00; }
+        .stock-badge.agotado { background: #9e9e9e; }
+
+        .stock-card.agotado {
+            opacity: 0.7;
+        }
+        .stock-card.agotado .stock-card-img {
+            filter: grayscale(60%);
+        }
+        .stock-disponible.agotado-label {
+            background: #f5f5f5;
+            border-color: #ccc;
+            color: #888;
+        }
+        .stock-disponible.agotado-label .stock-dot {
+            background: #bbb;
+            animation: none;
+        }
 
         .stock-card h4 { font-size: 1rem; font-weight: 700; color: #2c3e50; }
 
@@ -928,7 +945,7 @@
             const arr    = stockTab === "cafe" ? STOCK_CAFE : STOCK_SNACK;
 
             const visibles = lista
-                .filter(p => stockCategoria(p) === stockTab && p.stock > 0)
+                .filter(p => stockCategoria(p) === stockTab)
                 .sort((a, b) => {
                     const ia = arr.indexOf(a.descripcion);
                     const ib = arr.indexOf(b.descripcion);
@@ -952,6 +969,7 @@
                 const precio = p.precio_unitario > 0
                     ? `<dt>Precio unit.</dt><dd>L ${p.precio_unitario.toFixed(2)}</dd>`
                     : "";
+                const agotado  = p.stock <= 0;
                 const fotoSrc = STOCK_FOTOS[p.descripcion];
                 const fotoHtml = fotoSrc
                     ? `<img class="stock-card-img" src="${encodeURI(fotoSrc)}" alt="${p.descripcion}" loading="lazy">`
@@ -960,22 +978,33 @@
                 const presentacionHtml = presentacion
                     ? `<dt>Presentación</dt><dd>${presentacion}</dd>`
                     : "";
+                const estadoHtml = agotado
+                    ? `<div class="stock-disponible agotado-label"><span class="stock-dot"></span> Agotado temporalmente</div>`
+                    : `<div class="stock-disponible"><span class="stock-dot"></span> En existencia</div>`;
+                const stockHtml = agotado
+                    ? `<dt>Stock</dt><dd>Agotado</dd>`
+                    : `<dt>Stock</dt><dd>${p.stock.toLocaleString("es-HN")} unid.</dd>`;
+                const btnHtml = agotado
+                    ? `<a class="stock-btn-wa" href="${stockWaLink(p)}" target="_blank" rel="noopener" style="background:#9e9e9e">
+                            ${WA_SVG} Consultar disponibilidad
+                       </a>`
+                    : `<a class="stock-btn-wa" href="${stockWaLink(p)}" target="_blank" rel="noopener">
+                            ${WA_SVG} Consultar por WhatsApp
+                       </a>`;
                 return `
-                <div class="stock-card">
+                <div class="stock-card${agotado ? ' agotado' : ''}">
                     ${fotoHtml}
                     <div class="stock-card-body">
-                        <span class="stock-badge ${cat}">Disponible</span>
+                        <span class="stock-badge ${agotado ? 'agotado' : cat}">${agotado ? 'Agotado' : 'Disponible'}</span>
                         <h4>${p.descripcion}</h4>
                         <dl class="stock-meta">
                             ${tam}
                             ${presentacionHtml}
-                            <dt>Stock</dt><dd>${p.stock.toLocaleString("es-HN")} unid.</dd>
+                            ${stockHtml}
                             ${precio}
                         </dl>
-                        <div class="stock-disponible"><span class="stock-dot"></span> En existencia</div>
-                        <a class="stock-btn-wa" href="${stockWaLink(p)}" target="_blank" rel="noopener">
-                            ${WA_SVG} Consultar por WhatsApp
-                        </a>
+                        ${estadoHtml}
+                        ${btnHtml}
                     </div>
                 </div>`;
             }).join("");
