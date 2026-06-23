@@ -1048,7 +1048,16 @@
             "6X8":       "½ Libra",
             "5.25x10.5": "1 Libra",
             "5.25X10.5": "1 Libra",
+            "12x23.5":   "5 Libras",
+            "12X23.5":   "5 Libras",
         };
+
+        // Pares descripcion||tamanio que van en Café aunque la descripción no esté en STOCK_CAFE
+        const STOCK_CAFE_ESPECIFICOS = new Set([
+            "Bolsa bopp transp fuelle 50mc||6x11.25",
+            "Bolsa bopp transp mate fuelle 70mc||6x11.25",
+            "Bolsa bopp transp mate fuelle 70mc||12X23.5",
+        ]);
 
         const STOCK_SUBTITULOS = {
             "metalizada": {
@@ -1058,6 +1067,10 @@
             "premium": {
                 titulo: "Bolsas Premium (8 Sides)",
                 subtitulo: "Bolsa Fondo Cuadrado (8 Sides): Bolsas Metalizadas Trilaminadas 120 micras con v\u00e1lvula desgasificadora y zipper abre f\u00e1cil."
+            },
+            "transparente": {
+                titulo: "Bolsas Transparentes",
+                subtitulo: "Bolsa Sello Central con Fuelle: Laminadas Transparente Mate y Brillante de 70 micras."
             }
         };
 
@@ -1065,6 +1078,7 @@
             const d = (descripcion || "").toLowerCase();
             if (d.includes("metalizada")) return "metalizada";
             if (d.includes("premium") || d.includes("premiun")) return "premium";
+            if (d.includes("bopp") || d.includes("transp")) return "transparente";
             return "otro";
         }
 
@@ -1152,7 +1166,8 @@
 
         function stockCategoria(p) {
             const d = (p.descripcion || "").trim();
-            if (STOCK_CAFE.includes(d))  return "cafe";
+            if (STOCK_CAFE.includes(d)) return "cafe";
+            if (STOCK_CAFE_ESPECIFICOS.has(`${d}||${(p.tamanio || "").trim()}`)) return "cafe";
             return "snack"; // todo lo que no es Cafe va a Snack
         }
 
