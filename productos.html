@@ -1216,7 +1216,9 @@
             for (const p of visibles) {
                 const cat    = stockCategoria(p);
                 const tam    = p.tamanio ? `<dt>Tamaño</dt><dd>${p.tamanio}</dd>` : "";
-                const precioVal = stockGrupoCafe(p.descripcion) === "metalizada" ? 1.80 : p.precio_unitario;
+                const precioVal = stockGrupoCafe(p.descripcion) === "metalizada" ? 1.80
+                              : stockGrupoCafe(p.descripcion) === "premium"     ? 7.00
+                              : p.precio_unitario;
                 const precio = precioVal > 0
                     ? `<dt>Precio unit.</dt><dd>L ${precioVal.toFixed(2)}</dd>`
                     : "";
