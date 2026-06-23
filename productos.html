@@ -1061,6 +1061,13 @@
             "Bolsa bopp transp mate fuelle 70mc||12X23.5",
         ]);
 
+        // Precios fijos por descripcion||tamanio (sobreescribe la DB)
+        const STOCK_PRECIOS_FIJOS = {
+            "Bolsa bopp transp fuelle 50mc||6x11.25":       1.25,
+            "Bolsa bopp transp mate fuelle 70mc||6x11.25":  1.50,
+            "Bolsa bopp transp mate fuelle 70mc||12X23.5":  12.00,
+        };
+
         const STOCK_SUBTITULOS = {
             "metalizada": {
                 titulo: "Bolsas Metalizadas",
@@ -1216,9 +1223,10 @@
             for (const p of visibles) {
                 const cat    = stockCategoria(p);
                 const tam    = p.tamanio ? `<dt>Tamaño</dt><dd>${p.tamanio}</dd>` : "";
-                const precioVal = stockGrupoCafe(p.descripcion) === "metalizada" ? 1.80
-                              : stockGrupoCafe(p.descripcion) === "premium"     ? 7.00
-                              : p.precio_unitario;
+                const precioVal = STOCK_PRECIOS_FIJOS[`${p.descripcion}||${(p.tamanio||'').trim()}`]
+                              ?? (stockGrupoCafe(p.descripcion) === "metalizada" ? 1.80
+                               :  stockGrupoCafe(p.descripcion) === "premium"     ? 7.00
+                               :  p.precio_unitario);
                 const precio = precioVal > 0
                     ? `<dt>Precio unit.</dt><dd>L ${precioVal.toFixed(2)}</dd>`
                     : "";
