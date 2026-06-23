@@ -238,7 +238,86 @@
             .beneficios-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
+
+            .soluciones-grid {
+                grid-template-columns: 1fr;
+            }
         }
+
+        /* ── NUESTRAS SOLUCIONES ── */
+        .soluciones {
+            background: #f5f5f5;
+            padding: 52px 0 44px;
+        }
+
+        .soluciones-titulo {
+            text-align: center;
+            font-size: 26px;
+            font-weight: 800;
+            color: #111;
+            margin-bottom: 6px;
+            letter-spacing: -0.5px;
+        }
+
+        .soluciones-subtitulo {
+            text-align: center;
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 36px;
+        }
+
+        .soluciones-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .solucion-card {
+            background: #fff;
+            border-radius: 14px;
+            padding: 28px 22px 24px;
+            box-shadow: 0 2px 14px rgba(0,0,0,0.08);
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            transition: transform 0.22s, box-shadow 0.22s;
+        }
+
+        .solucion-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.13);
+        }
+
+        .solucion-ico { font-size: 40px; margin-bottom: 12px; }
+
+        .solucion-card h3 {
+            font-size: 17px;
+            font-weight: 800;
+            color: #111;
+            margin-bottom: 8px;
+        }
+
+        .solucion-card p {
+            font-size: 13px;
+            color: #555;
+            line-height: 1.6;
+            flex: 1;
+            margin-bottom: 18px;
+        }
+
+        .solucion-btn {
+            display: inline-block;
+            background: #f15a24;
+            color: #fff;
+            font-weight: 700;
+            font-size: 13px;
+            padding: 9px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+
+        .solucion-btn:hover { background: #d44a15; }
 
     </style>
 </head>
@@ -289,6 +368,37 @@
                     <div class="ico">🏷️</div>
                     <p>Precios al<br>por mayor</p>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="soluciones">
+        <div class="container">
+            <h2 class="soluciones-titulo">Nuestras Soluciones</h2>
+            <p class="soluciones-subtitulo">Empaques flexibles y etiquetas para cada tipo de negocio</p>
+            <div class="soluciones-grid">
+
+                <div class="solucion-card">
+                    <div class="solucion-ico">☕</div>
+                    <h3>Empaques para Café</h3>
+                    <p>Bolsas metalizadas y premium de 8 lados para presentar tu café con imagen profesional. Disponibles en múltiples colores y con bolsas transparentes BOPP para presentaciones de 1 y 5 libras.</p>
+                    <a class="solucion-btn" href="productos.html">Ver stock disponible</a>
+                </div>
+
+                <div class="solucion-card">
+                    <div class="solucion-ico">🍿</div>
+                    <h3>Empaques para Snack</h3>
+                    <p>Bolsas diseñadas para chicharrón, popcorn, platanitos, papas y frituras. Transparentes BOPP en múltiples calibres y tamaños, listas para sellado térmico y punto de venta.</p>
+                    <a class="solucion-btn" href="productos.html">Ver stock disponible</a>
+                </div>
+
+                <div class="solucion-card">
+                    <div class="solucion-ico">🏷️</div>
+                    <h3>Etiquetas Autoadhesivas Impresión Digital</h3>
+                    <p>Etiquetas personalizadas en impresión digital de alta calidad para tus productos. Ideales para identificar, promocionar y darle identidad de marca a tu empaque.</p>
+                    <a class="solucion-btn" href="https://wa.me/50492902991?text=Hola%2C%20me%20interesa%20cotizar%20etiquetas%20autoadhesivas" target="_blank" rel="noopener">Consultar por WhatsApp</a>
+                </div>
+
             </div>
         </div>
     </section>
