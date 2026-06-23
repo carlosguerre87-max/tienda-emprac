@@ -1068,6 +1068,11 @@
             "Bolsa bopp transp mate fuelle 70mc||12X23.5":  12.00,
         };
 
+        // Nombres de visualización corregidos (no afectan el match con la API)
+        const STOCK_NOMBRES = {
+            "Bolsa metalizada being": "Bolsa metalizada Beige",
+        };
+
         const STOCK_SUBTITULOS = {
             "metalizada": {
                 titulo: "Bolsas Metalizadas",
@@ -1164,7 +1169,7 @@
             const items = Object.values(pedido);
             if (!items.length) return;
             const lineas = items.map(({producto: p, cantidad}) =>
-                `\uD83D\uDCE6 *${p.descripcion}* (${p.tamanio || '\u2014'}) \u2014 ${cantidad} unidad${cantidad !== 1 ? 'es' : ''}`
+                `\uD83D\uDCE6 *${nombre}* (${p.tamanio || '\u2014'}) \u2014 ${cantidad} unidad${cantidad !== 1 ? 'es' : ''}`
             ).join("\n");
             const msg = `Hola! Quisiera hacer el siguiente pedido:\n\n${lineas}\n\n\u00BFPueden confirmarme disponibilidad y precio total?`;
             window.open(`https://wa.me/${STOCK_WA_NUM}?text=${encodeURIComponent(msg)}`, "_blank", "noopener");
@@ -1188,8 +1193,9 @@
         }
 
         function stockWaLink(p) {
+            const nombre = STOCK_NOMBRES[p.descripcion] || p.descripcion;
             const t = encodeURIComponent(
-                `Hola! Vi su catálogo en emprachn.com y me interesa:\n📦 *${p.descripcion}*\n📐 Tamaño: ${p.tamanio || "N/A"}\n¿Me pueden dar más información?`
+                `Hola! Vi su catálogo en emprachn.com y me interesa:\n📦 *${nombre}*\n📐 Tamaño: ${p.tamanio || "N/A"}\n¿Me pueden dar más información?`
             );
             return `https://wa.me/${STOCK_WA_NUM}?text=${t}`;
         }
@@ -1221,6 +1227,7 @@
             let lastGrupo = null;
             const parts = [];
             for (const p of visibles) {
+                const nombre = STOCK_NOMBRES[p.descripcion] || p.descripcion;
                 const cat    = stockCategoria(p);
                 const tam    = p.tamanio ? `<dt>Tamaño</dt><dd>${p.tamanio}</dd>` : "";
                 const precioVal = STOCK_PRECIOS_FIJOS[`${p.descripcion}||${(p.tamanio||'').trim()}`]
@@ -1272,7 +1279,7 @@
                     ${fotoHtml}
                     <div class="stock-card-body">
                         <span class="stock-badge ${agotado ? 'agotado' : cat}">${agotado ? 'Agotado' : 'Disponible'}</span>
-                        <h4>${p.descripcion}</h4>
+                        <h4>${nombre}</h4>
                         <dl class="stock-meta">
                             ${tam}
                             <dt>Stock</dt><dd>${agotado ? 'Agotado' : p.stock.toLocaleString('es-HN') + ' unid.'}</dd>
