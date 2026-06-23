@@ -752,6 +752,38 @@
         }
         .stock-btn-pedido:hover { background: #d44a15; }
         .stock-btn-pedido.en-pedido { background: #27ae60; }
+
+        /* ── Tooltip de ayuda para editar cantidad ── */
+        #stock-qty-hint {
+            position: absolute;
+            background: #1a1a2e;
+            color: #fff;
+            font-size: 13px;
+            font-weight: 600;
+            padding: 8px 14px;
+            border-radius: 8px;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0;
+            transform: translateY(6px);
+            transition: opacity .3s, transform .3s;
+            white-space: nowrap;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+        }
+        #stock-qty-hint::before {
+            content: '';
+            position: absolute;
+            top: -7px; left: 50%;
+            transform: translateX(-50%);
+            border: 7px solid transparent;
+            border-bottom-color: #1a1a2e;
+            border-top: none;
+        }
+        #stock-qty-hint.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
         .stock-cantidad-ctrl {
             display: flex; align-items: center; gap: 6px;
             background: #f4f4f4; border-radius: 8px; padding: 7px 10px;
@@ -1114,9 +1146,26 @@
 
         function pedidoAgregar(key) {
             if (!stockMap[key]) return;
+            const esNuevo = !pedido[key];
             if (!pedido[key]) pedido[key] = { producto: stockMap[key], cantidad: 1 };
             pedidoActualizarFAB();
             stockRender(stockTodos);
+            if (esNuevo) mostrarHintCantidad(key);
+        }
+
+        function mostrarHintCantidad(key) {
+            setTimeout(() => {
+                const safeKey = key.replace(/\|/g, '_');
+                const input = document.querySelector(`input[data-pkey="${safeKey}"]`);
+                const hint  = document.getElementById('stock-qty-hint');
+                if (!input || !hint) return;
+                const rect = input.getBoundingClientRect();
+                hint.style.left = Math.max(8, rect.left + rect.width / 2 - hint.offsetWidth / 2) + 'px';
+                hint.style.top  = (rect.bottom + window.scrollY + 12) + 'px';
+                hint.classList.add('visible');
+                clearTimeout(hint._timer);
+                hint._timer = setTimeout(() => hint.classList.remove('visible'), 2800);
+            }, 120);
         }
 
         function pedidoCambiarCantidad(key, delta) {
@@ -1257,7 +1306,7 @@
                     : enPedido
                         ? `<div class="stock-cantidad-ctrl">
                             <button onclick="pedidoCambiarCantidad('${key}', -1)">&#x2212;</button>
-                            <input type="number" value="${enPedido.cantidad}" min="1"
+                            <input type="number" data-pkey="${key.replace(/\|/g,'_')}" value="${enPedido.cantidad}" min="1"
                                 onchange="pedidoSetCantidad('${key}', this.value)"
                                 style="width:80px;text-align:center;border:1px solid #ddd;border-radius:6px;padding:4px;font-size:.95rem;font-weight:700">
                             <button onclick="pedidoCambiarCantidad('${key}', 1)">+</button>
@@ -1325,6 +1374,9 @@
         🛒 Ver Pedido
         <span class="pedido-fab-badge" id="pedido-fab-badge">0</span>
     </button>
+
+    <!-- Tooltip editar cantidad -->
+    <div id="stock-qty-hint">✏️ Edita la cantidad aquí</div>
 
     <!-- Modal Pedido -->
     <div class="pedido-overlay" id="pedido-overlay" onclick="if(event.target===this)pedidoCerrarModal()">
