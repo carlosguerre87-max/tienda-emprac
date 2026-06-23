@@ -1308,6 +1308,7 @@
                             <button onclick="pedidoCambiarCantidad('${key}', -1)">&#x2212;</button>
                             <input type="number" data-pkey="${key.replace(/\|/g,'_')}" value="${enPedido.cantidad}" min="1"
                                 onchange="pedidoSetCantidad('${key}', this.value)"
+                                onkeydown="if(event.key==='Enter'){pedidoSetCantidad('${key}',this.value);this.blur();}"
                                 style="width:80px;text-align:center;border:1px solid #ddd;border-radius:6px;padding:4px;font-size:.95rem;font-weight:700">
                             <button onclick="pedidoCambiarCantidad('${key}', 1)">+</button>
                             <span class="stock-cantidad-quitar" onclick="pedidoQuitar('${key}')">Quitar</span>
