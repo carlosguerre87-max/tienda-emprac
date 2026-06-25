@@ -753,6 +753,103 @@
         .stock-btn-pedido:hover { background: #d44a15; }
         .stock-btn-pedido.en-pedido { background: #27ae60; }
 
+        /* ── REDISEÑO TARJETA PRODUCTO ── */
+        .stock-card {
+            background: #fff; border-radius: 16px; padding: 0; gap: 0;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.09); overflow: hidden;
+            position: relative; display: flex; flex-direction: column;
+            transition: transform .15s, box-shadow .15s;
+        }
+        .stock-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.13); }
+        .stock-card.agotado { opacity: 0.72; }
+        .stock-card.agotado .stock-card-img { filter: grayscale(70%); }
+
+        .stock-disp-badge {
+            position: absolute; top: 12px; left: 12px; z-index: 2;
+            background: #1a5c2e; color: #fff; font-size: 10px; font-weight: 800;
+            letter-spacing: .8px; text-transform: uppercase;
+            padding: 4px 11px; border-radius: 20px;
+            display: inline-flex; align-items: center; gap: 5px;
+        }
+        .stock-disp-badge.agotado-badge { background: #757575; }
+        .stock-disp-badge .stock-dot { width: 6px; height: 6px; background: #7fff9e; animation: sp 1.8s infinite; }
+        .stock-disp-badge.agotado-badge .stock-dot { background: #bdbdbd; animation: none; }
+
+        .stock-card-upper {
+            display: flex; gap: 10px; background: #f5f6fa;
+            padding: 14px 12px 12px; min-height: 195px;
+        }
+        .stock-card-img-wrap {
+            flex: 0 0 55%; background: #fff; border-radius: 10px;
+            overflow: hidden; display: flex; align-items: center; justify-content: center;
+        }
+        .stock-card-img {
+            width: 100%; height: 168px; object-fit: contain;
+            padding: 8px; display: block; background: transparent;
+        }
+        .stock-card-no-img {
+            width: 100%; height: 168px; display: flex;
+            align-items: center; justify-content: center; font-size: 54px; color: #ccc;
+        }
+        .stock-card-features {
+            flex: 1; display: flex; flex-direction: column; gap: 5px; justify-content: center;
+        }
+        .stock-feature-row {
+            display: flex; align-items: flex-start; gap: 7px;
+            background: #fff; border-radius: 8px; padding: 5px 6px; border: 1px solid #efefef;
+        }
+        .stock-feature-ico {
+            width: 26px; height: 26px; border-radius: 7px; background: #e8f5e9;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 12px; flex-shrink: 0;
+        }
+        .stock-feature-txt strong { display: block; font-size: 10px; font-weight: 800; color: #2c3e50; line-height: 1.3; }
+        .stock-feature-txt span   { font-size: 9.5px; color: #777; line-height: 1.3; }
+
+        .stock-card-body {
+            padding: 13px 14px 14px; display: flex; flex-direction: column; gap: 8px; flex: 1;
+        }
+        .stock-card h4 {
+            font-size: .97rem; font-weight: 800; color: #1a1a1a; margin: 0; line-height: 1.3;
+        }
+        .stock-card-divider { border: none; border-top: 1px solid #eee; margin: 0; }
+
+        .stock-data-row { display: flex; align-items: center; gap: 10px; }
+        .stock-data-ico {
+            width: 30px; height: 30px; background: #eef2ff; border-radius: 8px;
+            display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0;
+        }
+        .stock-data-label { flex: 1; font-size: 12.5px; color: #666; }
+        .stock-data-value { font-size: 13px; font-weight: 700; color: #1a1a1a; }
+
+        .stock-card-badges { display: flex; gap: 7px; align-items: center; flex-wrap: wrap; }
+        .stock-presentacion-badge {
+            display: inline-flex; align-items: center; gap: 5px;
+            background: #fff3e0; color: #e65100; border: 1.5px solid #ffb74d;
+            font-size: .74rem; font-weight: 800; padding: 4px 10px; border-radius: 20px;
+        }
+        .stock-disponible {
+            display: inline-flex; align-items: center; gap: 5px;
+            font-size: .74rem; font-weight: 700; color: #1f7a3e;
+            background: #edf7ef; padding: 4px 10px; border-radius: 20px; border: 1px solid #b2dfc5;
+        }
+        .stock-disponible.agotado-label { background: #f5f5f5; border-color: #ccc; color: #888; }
+        .stock-btn-pedido {
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+            background: #f15a24; color: #fff; border: none; border-radius: 10px;
+            font-weight: 700; font-size: 1rem; padding: 13px;
+            cursor: pointer; width: 100%; transition: background .2s; margin-top: auto;
+        }
+        .stock-btn-pedido:hover { background: #d44a15; }
+        .stock-btn-wa {
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+            background: #9e9e9e; color: #fff; text-decoration: none;
+            font-weight: 700; font-size: .9rem; padding: 12px;
+            border-radius: 10px; margin-top: auto; transition: background .2s;
+        }
+        .stock-btn-wa:hover { background: #757575; }
+        .stock-btn-wa svg { width: 18px; height: 18px; fill: #fff; flex-shrink: 0; }
+
         /* ── Tooltip de ayuda para editar cantidad ── */
         #stock-qty-hint {
             position: absolute;
@@ -1105,6 +1202,57 @@
             "Bolsa metalizada being": "Bolsa metalizada Beige",
         };
 
+        // Características por grupo (panel derecho de la tarjeta)
+        const STOCK_CARACTERISTICAS = {
+            "metalizada": [
+                { icon: "🛡️", label: "Material",   value: "Trilaminado 70 micras" },
+                { icon: "☕",  label: "Ideal para",  value: "Café, té y snacks" },
+                { icon: "🔥",  label: "Sellado",     value: "Térmico resistente" },
+                { icon: "🎨",  label: "Color",       value: null },
+            ],
+            "premium": [
+                { icon: "⭐",  label: "Material",   value: "Trilaminado 120 micras" },
+                { icon: "☕",  label: "Ideal para",  value: "Café specialty" },
+                { icon: "🔒",  label: "Sellado",     value: "Térmico + Zipper" },
+                { icon: "🎨",  label: "Color",       value: null },
+            ],
+            "transparente": [
+                { icon: "✨",  label: "Material",   value: "BOPP laminado" },
+                { icon: "☕",  label: "Ideal para",  value: "Café y alimentos" },
+                { icon: "🔥",  label: "Sellado",     value: "Térmico resistente" },
+                { icon: "🌫️", label: "Acabado",     value: "Transparente Mate" },
+            ],
+            "snack": [
+                { icon: "🔬",  label: "Material",   value: "BOPP polipropileno" },
+                { icon: "🍿",  label: "Ideal para",  value: "Snacks y frituras" },
+                { icon: "🔥",  label: "Sellado",     value: "Térmico resistente" },
+                { icon: "✅",  label: "Apto para",   value: "Alimentos" },
+            ],
+            "otro": [
+                { icon: "📦",  label: "Tipo",        value: "Empaque flexible" },
+                { icon: "🍿",  label: "Ideal para",  value: "Alimentos" },
+                { icon: "🔥",  label: "Sellado",     value: "Térmico resistente" },
+                { icon: "✅",  label: "Calidad",     value: "Certificada" },
+            ],
+        };
+
+        const STOCK_COLORES = {
+            "negro": "Negro", "negra": "Negro",
+            "blanco": "Blanco", "blanca": "Blanco",
+            "rojo": "Rojo", "verde": "Verde",
+            "plata": "Plata", "plateado": "Plateado",
+            "being": "Beige", "beige": "Beige",
+            "dorado": "Dorado", "celeste": "Celeste", "kraft": "Kraft",
+        };
+
+        function stockColorNombre(nombre) {
+            const d = (nombre || "").toLowerCase();
+            for (const [k, v] of Object.entries(STOCK_COLORES)) {
+                if (d.includes(k)) return v;
+            }
+            return null;
+        }
+
         const STOCK_SUBTITULOS = {
             "metalizada": {
                 titulo: "Bolsas Metalizadas",
@@ -1290,19 +1438,22 @@
                 const key      = pedidoKey(p);
                 stockMap[key]  = p;
                 const enPedido = pedido[key];
-                const fotoSrc = STOCK_FOTOS[p.descripcion];
-                const fotoHtml = fotoSrc
-                    ? `<img class="stock-card-img" src="${encodeURI(fotoSrc)}" alt="${p.descripcion}" loading="lazy">`
-                    : "";
+                const fotoSrc  = STOCK_FOTOS[p.descripcion];
+                const fotoContent = fotoSrc
+                    ? `<img class="stock-card-img" src="${encodeURI(fotoSrc)}" alt="${nombre}" loading="lazy">`
+                    : `<div class="stock-card-no-img">📦</div>`;
                 const presentacion = STOCK_PRESENTACION[(p.tamanio || "").trim()];
                 const presentacionHtml = presentacion
                     ? `<div class="stock-presentacion-badge">⚖️ Presentación: <strong>${presentacion}</strong></div>`
                     : "";
                 const estadoHtml = agotado
-                    ? `<div class="stock-disponible agotado-label"><span class="stock-dot"></span> Agotado temporalmente</div>`
+                    ? `<div class="stock-disponible agotado-label"><span class="stock-dot"></span> Agotado</div>`
                     : `<div class="stock-disponible"><span class="stock-dot"></span> En existencia</div>`;
+                const dispBadge = agotado
+                    ? `<span class="stock-disp-badge agotado-badge"><span class="stock-dot"></span> AGOTADO</span>`
+                    : `<span class="stock-disp-badge"><span class="stock-dot"></span> DISPONIBLE</span>`;
                 const btnHtml = agotado
-                    ? `<a class="stock-btn-wa" href="${stockWaLink(p)}" target="_blank" rel="noopener" style="background:#9e9e9e">${WA_SVG} Consultar disponibilidad</a>`
+                    ? `<a class="stock-btn-wa" href="${stockWaLink(p)}" target="_blank" rel="noopener">${WA_SVG} Consultar disponibilidad</a>`
                     : enPedido
                         ? `<div class="stock-cantidad-ctrl">
                             <button onclick="pedidoCambiarCantidad('${key}', -1)">&#x2212;</button>
@@ -1315,8 +1466,18 @@
                            </div>`
                         : `<button class="stock-btn-pedido" onclick="pedidoAgregar('${key}')">&#x1F6D2; Agregar a Pedido</button>`;
 
+                const grupo = stockGrupoCafe(p.descripcion);
+                const chars = STOCK_CARACTERISTICAS[grupo] || STOCK_CARACTERISTICAS["otro"];
+                const colorVal = stockColorNombre(nombre);
+                const featuresHtml = chars.map(f => {
+                    const val = (f.label === "Color" && !f.value) ? (colorVal || "—") : (f.value || "—");
+                    return `<div class="stock-feature-row"><div class="stock-feature-ico">${f.icon}</div><div class="stock-feature-txt"><strong>${f.label}</strong><span>${val}</span></div></div>`;
+                }).join("");
+                const tamRow    = p.tamanio ? `<div class="stock-data-row"><div class="stock-data-ico">📏</div><span class="stock-data-label">Tamaño</span><span class="stock-data-value">${p.tamanio}</span></div>` : "";
+                const stockRow  = `<div class="stock-data-row"><div class="stock-data-ico">📦</div><span class="stock-data-label">Stock</span><span class="stock-data-value">${agotado ? "Agotado" : p.stock.toLocaleString("es-HN") + " unid."}</span></div>`;
+                const precioRow = precioVal > 0 ? `<div class="stock-data-row"><div class="stock-data-ico">🏷️</div><span class="stock-data-label">Precio unit.</span><span class="stock-data-value">L ${precioVal.toFixed(2)}</span></div>` : "";
+
                 if (stockTab === "cafe") {
-                    const grupo = stockGrupoCafe(p.descripcion);
                     if (grupo !== lastGrupo && STOCK_SUBTITULOS[grupo]) {
                         const info = STOCK_SUBTITULOS[grupo];
                         parts.push(`<div class="stock-group-header"><h3>${info.titulo}</h3><p>${info.subtitulo}</p></div>`);
@@ -1326,17 +1487,21 @@
 
                 parts.push(`
                 <div class="stock-card${agotado ? ' agotado' : ''}">
-                    ${fotoHtml}
+                    ${dispBadge}
+                    <div class="stock-card-upper">
+                        <div class="stock-card-img-wrap">${fotoContent}</div>
+                        <div class="stock-card-features">${featuresHtml}</div>
+                    </div>
                     <div class="stock-card-body">
-                        <span class="stock-badge ${agotado ? 'agotado' : cat}">${agotado ? 'Agotado' : 'Disponible'}</span>
                         <h4>${nombre}</h4>
-                        <dl class="stock-meta">
-                            ${tam}
-                            <dt>Stock</dt><dd>${agotado ? 'Agotado' : p.stock.toLocaleString('es-HN') + ' unid.'}</dd>
-                            ${precio}
-                        </dl>
-                        ${presentacionHtml}
-                        ${estadoHtml}
+                        <hr class="stock-card-divider">
+                        ${tamRow}
+                        ${stockRow}
+                        ${precioRow}
+                        <div class="stock-card-badges">
+                            ${presentacionHtml}
+                            ${estadoHtml}
+                        </div>
                         ${btnHtml}
                     </div>
                 </div>`);
