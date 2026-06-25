@@ -1163,6 +1163,12 @@
             "Bolsa bopp transp fuelle 50mc",
         ];
 
+        // Productos excluidos del catálogo (no aparecen en ninguna pestaña)
+        const STOCK_EXCLUIR = new Set([
+            "Bolsa palomitas Del Tropico",
+            "Bolsa Tajaditas Del Tropico",
+        ]);
+
         const STOCK_FOTOS = {
             "Bolsa Metalizada Negro":          "Imagenes de referencia/Bolsa Metalizada Nagra.jpeg",
             "Bolsa metalizada blanca":         "Imagenes de referencia/Bolsa Metalizada Blanca.jpeg",
@@ -1422,6 +1428,7 @@
             const arr    = stockTab === "cafe" ? STOCK_CAFE : STOCK_SNACK;
 
             const visibles = lista
+                .filter(p => !STOCK_EXCLUIR.has((p.descripcion || "").trim()))
                 .filter(p => stockCategoria(p) === stockTab)
                 .sort((a, b) => {
                     const ia = arr.indexOf(a.descripcion);
