@@ -761,8 +761,21 @@
             transition: transform .15s, box-shadow .15s;
         }
         .stock-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.13); }
-        .stock-card.agotado { opacity: 0.72; }
-        .stock-card.agotado .stock-card-img { filter: grayscale(70%); }
+        .stock-card.agotado { opacity: 0.75; }
+        .stock-card.agotado .stock-card-img { filter: grayscale(75%); }
+        .stock-card.agotado .stock-card-img-wrap { position: relative; }
+        .stock-card.agotado .stock-card-img-wrap::after {
+            content: "AGOTADO";
+            position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%) rotate(-32deg);
+            background: rgba(180, 0, 0, 0.85);
+            color: #fff; font-size: 17px; font-weight: 900;
+            letter-spacing: 2.5px; padding: 6px 20px;
+            border-radius: 5px; white-space: nowrap; z-index: 4;
+            border: 2.5px solid rgba(255,255,255,0.75);
+            text-shadow: 0 1px 4px rgba(0,0,0,0.35);
+            pointer-events: none;
+        }
 
         .stock-disp-badge {
             position: absolute; top: 12px; left: 12px; z-index: 2;
